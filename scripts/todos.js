@@ -16,21 +16,21 @@ function loadUserDrop() {
 }
 
 function loadUsersTable() {
-  fetch("http://localhost:8083/api/users")
+   const userId = userDrop.value
+  fetch(`http://localhost:8083/api/todos/byuser/${userId}`)
     .then((response) => response.json())
     .then((users) => {
       usersTableBody.innerText = " ";
       for (const user of users) {
-        if (userDrop.value == user.id) {
           let row = usersTableBody.insertRow();
           let cell1 = row.insertCell();
-          cell1.innerText = user.name;
+          cell1.innerText = user.category;
           let cell2 = row.insertCell();
-          cell2.innerText = user.username;
+          cell2.innerText = user.description;
         }
-      }
-    });
-}
+      })
+    };
+
 
 function displayTodos() {
   const userId = userDrop.value;
